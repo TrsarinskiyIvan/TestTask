@@ -10,8 +10,8 @@ public class TestTask {
         mainThread.start();
 
         Thread providerThred;
-        for (int i = 1; i <= 3; i++) {
-            providerThred = new Thread(new Provider("/home/ivan/file" + i));
+        for (int i = 0; i < 3; i++) {
+            providerThred = new Thread(new Provider(args[i]));
             providerThred.start();
         }
 
