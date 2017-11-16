@@ -27,8 +27,9 @@ public class Main implements Runnable {
             return serverSocket.accept();
         } catch (IOException ex) {
             Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
         }
-        return null;
+
     }
 
     @Override
@@ -80,7 +81,6 @@ public class Main implements Runnable {
                         output.close();
                         input.close();
                         socket.close();
-                        
 
                     } catch (IOException ex) {
                         Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
