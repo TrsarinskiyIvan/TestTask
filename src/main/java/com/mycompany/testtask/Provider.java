@@ -1,5 +1,6 @@
 package com.mycompany.testtask;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -7,6 +8,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.Socket;
+import java.nio.ByteBuffer;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -32,7 +34,9 @@ public class Provider implements Runnable {
 
             sendData();
             reciveData();
-
+            
+            input.close();
+            output.close();
             socket.close();
 
         } catch (IOException ex) {
@@ -44,22 +48,30 @@ public class Provider implements Runnable {
 
     public void sendData() {
 
+        File file = new File(path);
         FileInputStream fis = null;
 
         try {
-            fis = new FileInputStream(path);
+            fis = new FileInputStream(file);
         } catch (FileNotFoundException ex) {
             Logger.getLogger(Provider.class.getName()).log(Level.SEVERE, null, ex);
         }
 
         try {
 
-            int currentByte;
+            int sizeData = (int) file.length();
+            ByteBuffer sizeBuffer = ByteBuffer.allocate(4);
+            sizeBuffer.putInt(sizeData);
 
-            while ((currentByte = fis.read()) != -1) {
-                output.write(currentByte);
+            byte[] sizeToArr = sizeBuffer.array();
+
+            output.write(sizeToArr);
+            output.flush();
+            int b;
+            for (int i = 0; i < sizeData; i++) {
+                b = fis.read();
+                output.write(b);
             }
-
             output.flush();
 
         } catch (IOException ex) {
@@ -74,7 +86,6 @@ public class Provider implements Runnable {
             }
 
         }
-        System.out.println("Data were sent");
     }
 
     public void reciveData() {
@@ -89,20 +100,19 @@ public class Provider implements Runnable {
 
         try {
 
-            while (true) {
+            byte[] sizeArr = new byte[4];
 
-                int size = input.available();
-                if (size != 0) {
-
-                    int currentByte = input.read();
-                    fos.write(currentByte);
-
-                } else {
-                    fos.flush();
-                    break;
-                }
-
+            for (int i = 0; i < 4; i++) {
+                sizeArr[i] = (byte) input.read();
             }
+
+            int sizeInt = ByteBuffer.wrap(sizeArr).getInt();
+
+            for (int i = 0; i < sizeInt; i++) {
+                fos.write(input.read());
+            }
+
+            output.flush();
 
         } catch (IOException ex) {
             Logger.getLogger(Provider.class.getName()).log(Level.SEVERE, null, ex);
@@ -115,6 +125,5 @@ public class Provider implements Runnable {
                 }
             }
         }
-        System.out.println("Recived");
     }
 }
