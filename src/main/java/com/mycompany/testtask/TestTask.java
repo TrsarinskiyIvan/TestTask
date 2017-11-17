@@ -1,20 +1,21 @@
 package com.mycompany.testtask;
 
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+
 public class TestTask {
 
     public static void main(String[] args) throws InterruptedException {
 
-        Main main = new Main();
+        ExecutorService es = Executors.newFixedThreadPool(4);
 
-        Thread mainThread = new Thread(main);
-        mainThread.start();
+        es.execute(new Main());
 
-        Thread providerThred;
         for (int i = 0; i < 3; i++) {
-            providerThred = new Thread(new Provider(args[i]));
-            providerThred.start();
+            es.execute(new Thread(new Provider(args[i])));
         }
 
+        es.shutdown();
     }
 
 }

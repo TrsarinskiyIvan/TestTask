@@ -1,0 +1,6 @@
+What is SHA-256?
+The SHA (Secure Hash Algorithm) is one of a number of cryptographic hash functions. A cryptographic hash is like a signature for a text or a data file. SHA-256 algorithm generates an almost-unique, fixed size 256-bit (32-byte) hash. Hash is a one way function – it cannot be decrypted back. This makes it suitable for password validation, challenge hash authentication, anti-tamper, digital signatures.
+
+SHA-256 is one of the successor hash functions to SHA-1, and is one of the strongest hash functions available.
+
+19944f5f041038224b9997c527ee721e44ae10e72953a4e065d6126db8322567e4ff225972bb64917d1e0aab6c51bc4215ac8b78f602e2e42a4e6432ad69d7609619425f1684364f80e7c3a9c39e1da55ccf1daa64e6b4cc3f9841d5f687c6439b891a8cc93c16d64e4509201ca7bf9e096732b411c4399e3c8a6662baed2410237861a116ea038831ea8633e4cf27aa9e7c10ffa8e7945e49344e283fdc50435629b01065bd4baae3deb3ef27dfbaf03c0c715fdf0284ab15529b36f7420a003b182c5fab1071b37db34a7c85bba7885aa30a5db0df7a049b38d02def63ee1961071b80395fdf7140b785ff6606a78afc38b04f119a0b980d91dbddc9ce734f2c89aa6517cfe83c36da13c6fb7db0ea5bfe0941c13b73966812f2ab5ca1b70d04dc417b786714de39857be003214b521e600e2dc490c6270a195957d2b668b8ed045ca51c1c84803930c5a36cc4acfd959cc948aea1c746a740b2e5d4933bd6

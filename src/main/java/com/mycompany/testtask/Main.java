@@ -78,6 +78,12 @@ public class Main implements Runnable {
                             output.write(data[i]);
                         }
                         output.flush();
+                        
+                        try {
+                            Thread.sleep(1000);
+                        } catch (InterruptedException ex) {
+                            Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+                        }
                         output.close();
                         input.close();
                         socket.close();
