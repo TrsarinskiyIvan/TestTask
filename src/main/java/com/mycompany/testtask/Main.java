@@ -53,9 +53,9 @@ public class Main implements Runnable {
                             dataByte[i] = (byte) input.read();
                         }
                         int sizeData = ByteBuffer.wrap(dataByte).getInt();
-                        byte[] data = new byte[sizeData];
+                        byte[] data = new byte[sizeData-1];
 
-                        for (int i = 0; i < sizeData; i++) {
+                        for (int i = 0; i < data.length; i++) {
                             data[i] = (byte) input.read();
                         }
 
